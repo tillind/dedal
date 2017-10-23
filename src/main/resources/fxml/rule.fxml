@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.dedal.controller.RuleController">
+   <children>
+      <Button layoutX="534.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitToMenuHandle" text="Retour" />
+      <TextArea layoutX="36.0" layoutY="41.0" prefHeight="291.0" prefWidth="529.0" text="de 2 joueurs à plus - 6 dés&#10;Le premier joueur (que l’on déterminera de la manière la plus rapide possible) lance les 6 dés.&#10;S’il fait du premier jet : 1.2.3.4.5.6. il se marque 25 points (ou prend 5 jetons)&#10;123456&#10;&#10;S’il fait du premier jet : 1.2.3.4.5. et un autre il se marque 20 points (ou prend 4 jetons)&#10;12345&#10;&#10;S’il fait du premier jet : 1.2.3.4. et deux autres il se marque 15 points (ou prend 3 jetons)&#10;1234&#10;S’il fait du premier jet : 1.2.3. et trois autres il se marque 10 points (ou prend 2 jetons)&#10;123&#10;&#10;S’il fait du premier jet : 1.2. et quatre autres il se marque 5 points (ou prend 1 jeton)&#10;12&#10;&#10;Puis c’est au joueur suivant de tenter de faire une toute petite suite ou une grande suite et de marquer ses points (ou de prendre des jetons) de la manière indiquée pour le premier joueur.&#10;Attention, si un joueur fait 3 as, il repart à zéro (ou rend tous ses jetons)&#10;111&#10;&#10;&#10;Le gagnant est celui qui atteint 100 points (ou qui a 20 jetons)" />
+      <Label layoutX="22.0" layoutY="14.0" text="Regles du jeu" />
+   </children>
+</AnchorPane>

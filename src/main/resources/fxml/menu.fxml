@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.miage.dedal.controller.MenuController">
+   <children>
+      <Button layoutX="256.0" layoutY="158.0" mnemonicParsing="false" onAction="#goToGameHandle" prefHeight="42.0" prefWidth="108.0" text="Lancer une partie" />
+      <Button layoutX="256.0" layoutY="223.0" mnemonicParsing="false" onAction="#goToRuleHandle" prefHeight="42.0" prefWidth="108.0" text="Règles du jeu" />
+      <Button layoutX="256.0" layoutY="292.0" mnemonicParsing="false" onAction="#goToOptionsHandle" prefHeight="42.0" prefWidth="108.0" text="Options" />
+      <Button layoutX="509.0" layoutY="344.0" mnemonicParsing="false" onAction="#exitApplicationHandle" prefHeight="42.0" prefWidth="77.0" text="Quitter" />
+      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="210.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../img/jeux-de-des.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
