@@ -22,9 +22,9 @@
       </AnchorPane>
    </top>
    <right>
-      <AnchorPane prefHeight="74.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="263.0" prefWidth="313.0" BorderPane.alignment="CENTER">
          <children>
-            <ListView prefHeight="263.0" prefWidth="200.0" />
+            <ListView fx:id="logHandle" prefHeight="263.0" prefWidth="319.0" />
          </children>
       </AnchorPane>
    </right>
@@ -36,19 +36,22 @@
       </AnchorPane>
    </bottom>
    <center>
-      <AnchorPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <AnchorPane prefHeight="261.0" prefWidth="243.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="91.0" layoutY="5.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/proba.png" />
                </image>
             </ImageView>
-            <Button layoutX="166.0" layoutY="222.0" mnemonicParsing="false" text="Roll" />
-            <Label layoutX="112.0" layoutY="170.0" text="Dé 1 :" />
-            <Label layoutX="149.0" layoutY="170.0" text="4" />
-            <Label layoutX="193.0" layoutY="170.0" text="Dé 2:" />
-            <Label layoutX="230.0" layoutY="170.0" text="6" />
-            <Label layoutX="322.0" layoutY="170.0" text="10" />
+            <Button layoutX="89.0" layoutY="227.0" mnemonicParsing="false" onAction="#playHandle" text="Roll" />
+            <Label layoutX="35.0" layoutY="175.0" text="Dé 1 :" />
+            <Label fx:id="valueDice1" layoutX="72.0" layoutY="175.0" text="4" />
+            <Label layoutX="116.0" layoutY="175.0" text="Dé 2:" />
+            <Label fx:id="valueDice2" layoutX="153.0" layoutY="175.0" text="6" />
+            <Label fx:id="valueTotal" layoutX="245.0" layoutY="175.0" text="10" />
+            <Label layoutX="172.0" layoutY="14.0" text="Manche" />
+            <Label fx:id="handle" layoutX="231.0" layoutY="14.0" text="0" />
+            <Label layoutX="143.0" layoutY="231.0" text="Manche terminer" />
          </children>
       </AnchorPane>
    </center>

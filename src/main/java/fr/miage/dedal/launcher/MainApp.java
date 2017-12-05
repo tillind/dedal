@@ -5,7 +5,15 @@ import fr.miage.dedal.controller.GameController;
 import fr.miage.dedal.controller.MenuController;
 import fr.miage.dedal.controller.RuleController;
 import fr.miage.dedal.core.parameter.EMenu;
+import fr.miage.dedal.core.parameter.EPersistance;
+import fr.miage.dedal.core.parameter.Parameter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -23,6 +31,7 @@ public class MainApp extends Application {
     @Override
     public void start(Stage s) throws Exception {
         this.stage = s;
+        this.verifParameter();
         switchScene(EMenu.MENU);
     }
 
@@ -77,6 +86,32 @@ public class MainApp extends Application {
         {
             Logger.getLogger(MainApp.class.getName()).log(Level.SEVERE, null, e);
         }
+    }
+     
+    private void verifParameter(){
+        File file =  new File("param.ser") ;
+
+        if(!file.exists()){
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.INFO, "Création d'un fichier de paramètre", "Création d'un fichier de paramètre");            
+            Parameter tmp = new Parameter();
+            tmp.setName("Player_1");
+            tmp.setP(EPersistance.XML);
+            
+            ObjectOutputStream oos = null ;
+            try {
+                oos = new ObjectOutputStream(new FileOutputStream(file));
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            try {
+                oos.writeObject(tmp);
+            } catch (IOException ex) {
+                Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+   
     }
 
 }

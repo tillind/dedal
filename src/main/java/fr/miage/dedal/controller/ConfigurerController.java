@@ -6,13 +6,30 @@
 package fr.miage.dedal.controller;
 
 import fr.miage.dedal.core.parameter.EMenu;
+import fr.miage.dedal.core.parameter.EPersistance;
+import fr.miage.dedal.core.parameter.Parameter;
 import fr.miage.dedal.launcher.MainApp;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 
 /**
  * FXML Controller class
@@ -20,7 +37,14 @@ import javafx.fxml.Initializable;
  * @author alex
  */
 public class ConfigurerController implements Initializable {
-
+    private Parameter param;
+    
+    @FXML
+    public TextField pseudo;
+    @FXML
+    public RadioButton json,xml;
+    @FXML
+    public ToggleGroup type;
 
 
     /**
@@ -28,7 +52,32 @@ public class ConfigurerController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        File file =  new File("param.ser") ;
+
+        ObjectInputStream ois = null ;
+        try {
+            ois = new ObjectInputStream(new FileInputStream(file));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        try {
+            param= (Parameter)ois.readObject() ;
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        pseudo.setText(param.getName());
+        
+        if(param.getP().equals(EPersistance.XML)){
+            this.xml.setSelected(true);
+        }else{
+            this.json.setSelected(true);
+        }
+        
+
     }  
     
     private MainApp myApps;
@@ -37,7 +86,40 @@ public class ConfigurerController implements Initializable {
     }
     
     @FXML
+    private void saveAndExitHandle(ActionEvent actionEvent){
+        param.setName(pseudo.getText());
+        File fichier =  new File("param.ser") ;
+        ObjectOutputStream oos = null ;
+        try {
+            oos = new ObjectOutputStream(new FileOutputStream(fichier));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            oos.writeObject(param) ;
+        } catch (IOException ex) {
+            Logger.getLogger(ConfigurerController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+         this.myApps.switchScene(EMenu.MENU);
+    }
+    
+    @FXML
     private void exitToMenuHandle(ActionEvent actionEvent){
         this.myApps.switchScene(EMenu.MENU);
     }
+    
+    @FXML
+    private void selectXmlRadioHandle(ActionEvent actionEvent){
+        param.setP(EPersistance.XML);
+    }
+    
+    @FXML
+    private void selectJsonRadioHandle(ActionEvent actionEvent){
+        param.setP(EPersistance.JSON);
+    }
+    
+
 }

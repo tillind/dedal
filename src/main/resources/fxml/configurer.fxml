@@ -4,6 +4,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
@@ -15,11 +16,14 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <TextField layoutX="226.0" layoutY="164.0" />
+      <TextField fx:id="pseudo" layoutX="226.0" layoutY="164.0" />
       <Label layoutX="80.0" layoutY="216.0" text="Support d'enregistrement" />
-      <RadioButton layoutX="226.0" layoutY="216.0" mnemonicParsing="false" text="Json" />
-      <RadioButton layoutX="330.0" layoutY="216.0" mnemonicParsing="false" text="XML" />
-      <Button layoutX="408.0" layoutY="361.0" mnemonicParsing="false" text="Sauvegarder" />
+      <RadioButton fx:id="json" layoutX="226.0" layoutY="216.0" mnemonicParsing="false" onAction="#selectJsonRadioHandle" text="Json">
+         <toggleGroup>
+            <ToggleGroup fx:id="type" />
+         </toggleGroup></RadioButton>
+      <RadioButton layoutX="330.0" layoutY="216.0" mnemonicParsing="false" onAction="#selectXmlRadioHandle" text="XML" toggleGroup="$type" fx:id="xml" />
+      <Button layoutX="408.0" layoutY="361.0" mnemonicParsing="false" onAction="#saveAndExitHandle" text="Sauvegarder" />
       <Button layoutX="515.0" layoutY="361.0" mnemonicParsing="false" onAction="#exitToMenuHandle" text="Annuler" />
    </children>
 </AnchorPane>
