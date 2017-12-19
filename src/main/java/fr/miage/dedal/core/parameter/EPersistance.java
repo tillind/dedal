@@ -11,6 +11,7 @@ package fr.miage.dedal.core.parameter;
  */
 public enum EPersistance {
     XML,
-    JSON;
+    JSON,
+    REDIS;
     
 }

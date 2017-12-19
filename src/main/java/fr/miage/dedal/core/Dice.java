@@ -28,9 +28,7 @@ public class Dice extends Observable{
    public void roll(){
        logger.log(Level.INFO," le dé roule");
        Random r = new Random();
-        int n = 6 - 1 + 1;
-        int i = r.nextInt() % n;
-        value =  1 + i;
+       value = r.nextInt(7 - 0 + 1) + 0;
        this.setChanged();
        this.notifyObservers(this.value);
    }

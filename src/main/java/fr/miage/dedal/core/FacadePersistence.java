@@ -8,6 +8,7 @@ package fr.miage.dedal.core;
 import fr.miage.dedal.core.parameter.EPersistance;
 import fr.miage.dedal.entity.HandleDao;
 import fr.miage.dedal.entity.HandleJsonDao;
+import fr.miage.dedal.entity.HandleRedisDao;
 import fr.miage.dedal.entity.HandleXMLDao;
 
 /**
@@ -20,20 +21,21 @@ public class FacadePersistence {
     
     public FacadePersistence(EPersistance ep){
         switch(ep){
-            case JSON: persist = new  HandleJsonDao();
-            case XML: persist = new  HandleXMLDao();
+            case JSON: persist = new  HandleJsonDao();break;
+            case XML: persist = new  HandleXMLDao();break;
+            case REDIS: persist = new  HandleRedisDao();break;
         }
     }
     
-    public void saveHandle(Handle h){
+    public void saveHandle(Party h){
         persist.Create(h);
     }
     
-    public void clearHandle(Handle h){
+    public void clearHandle(Party h){
         persist.Delete(h);
     }
     
-    public Handle getHandle(){
+    public Party getHandle(){
         return persist.findAll();
     }
     

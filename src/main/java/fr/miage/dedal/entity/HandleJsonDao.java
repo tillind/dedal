@@ -7,8 +7,13 @@ package fr.miage.dedal.entity;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fr.miage.dedal.core.Handle;
+import fr.miage.dedal.core.Party;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -17,29 +22,41 @@ import java.util.logging.Logger;
  * @author alex
  */
 public class HandleJsonDao extends HandleDao {
-    private String nameFile="save.xml";
+    private String nameFile="save.json";
     @Override
-    public Handle Create(Handle o) {
+    public Party Create(Party o) {
         ObjectMapper mapper = new ObjectMapper();
-
+        File fichier = new File(nameFile);
+        FileOutputStream fos=null;
+        try {
+            fos = new FileOutputStream(fichier);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(HandleXMLDao.class.getName()).log(Level.SEVERE, null, ex);
+        }
         try {
             //Object to JSON in file
-            mapper.writeValue(new File(nameFile), o);
+            mapper.writeValue(fichier, o);
         } catch (IOException ex) {
             Logger.getLogger(HandleJsonDao.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+           try {
+               fos.close();
+           } catch (IOException ex) {
+               Logger.getLogger(HandleXMLDao.class.getName()).log(Level.SEVERE, null, ex);
+           }
         }
         return o;
     }
     
        
     @Override
-    public Handle Update(Handle o) {
+    public Party Update(Party o) {
         this.Delete(o);
         return this.Create(o);
     }
     
     @Override
-    public void Delete(Handle o) {
+    public void Delete(Party o) {
         try{
             File file = new File(nameFile);
             if(file.delete()){
@@ -53,16 +70,22 @@ public class HandleJsonDao extends HandleDao {
     }
     
     @Override
-    public Handle findAll() {
+    public Party findAll() {
+        Party handle = null;
         ObjectMapper mapper = new ObjectMapper();
-
-        Handle obj = null;
         try {
-            obj = mapper.readValue(new File(nameFile), Handle.class);
-        } catch (IOException ex) {
+            FileInputStream fis = new FileInputStream(new File(nameFile));
+            try {
+                handle = mapper.readValue(fis, Party.class);
+            } catch (IOException ex) {
+                Logger.getLogger(HandleJsonDao.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        } catch (FileNotFoundException ex) {
             Logger.getLogger(HandleJsonDao.class.getName()).log(Level.SEVERE, null, ex);
-        } 
-        return obj;
+            handle = new Party();
+        }
+       
+        return handle;
     }
     
 }

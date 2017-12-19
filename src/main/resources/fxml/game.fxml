@@ -38,7 +38,7 @@
    <center>
       <AnchorPane prefHeight="261.0" prefWidth="243.0" BorderPane.alignment="CENTER">
          <children>
-            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="14.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="113.0" fitWidth="158.0" layoutX="42.0" layoutY="47.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../img/proba.png" />
                </image>
@@ -49,9 +49,19 @@
             <Label layoutX="116.0" layoutY="175.0" text="Dé 2:" />
             <Label fx:id="valueDice2" layoutX="153.0" layoutY="175.0" text="6" />
             <Label fx:id="valueTotal" layoutX="245.0" layoutY="175.0" text="10" />
-            <Label layoutX="172.0" layoutY="14.0" text="Manche" />
-            <Label fx:id="handle" layoutX="231.0" layoutY="14.0" text="0" />
+            <Label layoutX="200.0" layoutY="31.0" text="Manche" />
+            <Label fx:id="handle" layoutX="248.0" layoutY="31.0" text="0" />
             <Label layoutX="143.0" layoutY="231.0" text="Manche terminer" />
+            <Label layoutX="86.0" layoutY="-8.0" text="Partie">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="party" layoutX="158.0" layoutY="-7.0" text="0">
+               <font>
+                  <Font name="System Bold" size="24.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
    </center>

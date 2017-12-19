@@ -5,23 +5,15 @@
  */
 package fr.miage.dedal.controller;
 
-import fr.miage.dedal.core.FacadePersistence;
 import fr.miage.dedal.core.Game;
 import fr.miage.dedal.core.Player;
 import fr.miage.dedal.core.parameter.EMenu;
 import fr.miage.dedal.core.parameter.Parameter;
 import fr.miage.dedal.launcher.MainApp;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.URL;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,12 +32,13 @@ public class GameController implements Initializable, Observer {
     private Game game;
     private MainApp myApps;
     private int numberHandle;
+    
     ObservableList<String> items =FXCollections.observableArrayList ();
 
     private Parameter param;
     
     @FXML
-    public Label valueDice1,valueDice2,valueTotal,handle;
+    public Label valueDice1,valueDice2,valueTotal,handle,party;
     @FXML
     public ListView<String> logHandle;
     /**
@@ -55,6 +48,7 @@ public class GameController implements Initializable, Observer {
     public void initialize(URL url, ResourceBundle rb) {
 
         this.game = Game.getInstance();
+        this.game.setGc(this);
         this.game.getPlayer().addObserver(this);
         
         logHandle.setItems(items);
@@ -89,13 +83,17 @@ public class GameController implements Initializable, Observer {
         this.valueDice1.setText(Integer.toString(tmp.valueDice1())); 
         this.valueDice2.setText(Integer.toString(tmp.valueDice2())); 
         this.valueTotal.setText(Integer.toString(tmp.score()));
-        this.handle.setText(Integer.toString(numberHandle));
-        this.addLog(tmp.getName(), tmp.valueDice1(), tmp.valueDice2(), tmp.score());
-        
+        this.handle.setText(Integer.toString(numberHandle));   
     }
     
-    private void addLog(String name,int value1,int value2, int score){
-        this.items.add("["+name+"] : Dé 1: "+value1+" Dé 2: " +value2+" score :"+score);
+    public void updateParty(String value){
+        this.party.setText(value);
+        this.handle.setText(Integer.toString(0));   
+        numberHandle = 0;
+    }
+    
+    public void addLog(String name,int party, int score){
+        this.items.add("["+name+"] : Party "+party+" score :"+score);
     }
     
     

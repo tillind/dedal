@@ -21,14 +21,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 
 /**
@@ -42,7 +39,7 @@ public class ConfigurerController implements Initializable {
     @FXML
     public TextField pseudo;
     @FXML
-    public RadioButton json,xml;
+    public RadioButton json,xml,redis;
     @FXML
     public ToggleGroup type;
 
@@ -73,10 +70,12 @@ public class ConfigurerController implements Initializable {
         
         if(param.getP().equals(EPersistance.XML)){
             this.xml.setSelected(true);
-        }else{
+        }else if(param.getP().equals(EPersistance.JSON)){
             this.json.setSelected(true);
+        }else{
+            this.redis.setSelected(true);
         }
-        
+      
 
     }  
     
@@ -120,6 +119,12 @@ public class ConfigurerController implements Initializable {
     private void selectJsonRadioHandle(ActionEvent actionEvent){
         param.setP(EPersistance.JSON);
     }
+    
+    @FXML
+    private void selectRedisRadioHandle(ActionEvent actionEvent){
+        param.setP(EPersistance.REDIS);
+    }
+    
     
 
 }

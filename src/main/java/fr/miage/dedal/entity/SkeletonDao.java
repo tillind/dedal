@@ -5,6 +5,8 @@
  */
 package fr.miage.dedal.entity;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author alex
